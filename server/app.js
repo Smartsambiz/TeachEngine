@@ -6,6 +6,11 @@ const database = require("./supabaseClient");
 const teacherRoute = require("./routes/TeacherRoutes");
 const errorHandler = require("./middleware/errorHandler");
 const classRoute = require("./routes/classRoutes");
+const subjectRoute = require("./routes/subjectRoutes");
+const schemeRoute = require("./routes/schemeRoutes");
+const topicsRoute = require("./routes/topicsRoutes");
+const lessonRoute = require("./routes/lessonRoutes");
+const authRoute = require("./routes/authRoutes");
 
 const PORT = process.env.PORT;
 
@@ -23,8 +28,13 @@ app.get('/health', (req, res)=>{
 
 
 // routes
+app.use('/api', authRoute);
 app.use('/api',teacherRoute);
 app.use('/api',classRoute);
+app.use('/api', subjectRoute);
+app.use('/api', schemeRoute);
+app.use('/api', topicsRoute);
+app.use('/api', lessonRoute);
 
 // error handling middleware
 app.use(errorHandler)

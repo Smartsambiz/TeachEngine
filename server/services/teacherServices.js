@@ -1,10 +1,10 @@
 const database = require("../supabaseClient");
 
-const registerTeacher = async (name, email)=>{
+const registerTeacher = async (id, name, email)=>{
     
     const { data , error } = await database.from("teacher").insert({
-        name, email
-    });
+        id, name, email
+    }).select();
 
     return { data, error }
 };

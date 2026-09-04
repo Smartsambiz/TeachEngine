@@ -12,7 +12,7 @@ CREATE TABLE public.teacher (
 CREATE TABLE public.class (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
   class_name text,
-  academic_year/term text,
+  academic_term text,
   created_at timestamp with time zone NOT NULL DEFAULT now(),
   teacher_id uuid DEFAULT gen_random_uuid(),
   CONSTRAINT class_pkey PRIMARY KEY (id),
@@ -20,7 +20,7 @@ CREATE TABLE public.class (
 );
 CREATE TABLE public.subjects (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
-  subject_code text,
+  subject_name text,
   class_id uuid,
   created_at timestamp with time zone NOT NULL DEFAULT now(),
   CONSTRAINT subjects_pkey PRIMARY KEY (id),
