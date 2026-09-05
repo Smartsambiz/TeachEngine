@@ -17,7 +17,10 @@ const createTopicProfile = async(title, objectives, week, schemeId)=>{
 };
 
 const getTopicsByScheme = async(schemeId)=>{
-    const { data, error } = await databaseFrom.select("*").eq("scheme_id", schemeId);
+    const { data, error } = await databaseFrom
+        .select("*")
+        .eq("scheme_id", schemeId)
+        .order("week", { ascending: true });
 
     result.data = data;
     result.error = error;

@@ -33,9 +33,9 @@ const getTopics = async(req, res)=>{
         throw error;
     }
 
-    if(!data || data.length === 0){
-        const newError = new Error("No topics found");
-        newError.status = 404;
+    if(!data){
+        const newError = new Error("Unable to load topics");
+        newError.status = 500;
         throw newError;
     }
 

@@ -23,10 +23,8 @@ const getClassByTeacher = async(req, res)=>{
     
         const teacherId = req.user.id;
         const { data, error} = await classService.getClassesByTeacher(teacherId);
-        if(!data || data.length === 0 || error){
-            const newError = new Error("No class found");
-            newError.status = 404;
-            throw newError
+        if(error){
+            throw error;
         }
         res.status(200).json({
             message: "success",
@@ -49,9 +47,13 @@ const updateClassByTeacher = async(req, res, next)=>{
         };
 
         const { data, error } = await classService.updateClassProfile(id, className, academicYear);
-        if(!data || error){
-            const newError = new Error(error);
+        if(error){
             throw error;
+        }
+        if(!data || data.length === 0){
+            const newError = new Error("Class not found");
+            newError.status = 404;
+            throw newError;
         };
 
         res.status(200).json({
@@ -60,7 +62,7 @@ const updateClassByTeacher = async(req, res, next)=>{
         })
     }catch(err){
         console.log(err);
-        next(err);s
+        next(err);
     }   
     
 
@@ -70,6 +72,11 @@ const deleteClassByTeacher = async(req, res, next)=>{
     try{
         const id = req.params.id;
         const { data, error } = await classService.deleteClassProfile(id);
+        if(error){
+            const deleteError = new Error("This class still has related subjects. Remove those records first, then try again.");
+            deleteError.status = 409;
+            throw deleteError;
+        }
         res.status(200).json({
             message: "Class deleted successfully",
             data

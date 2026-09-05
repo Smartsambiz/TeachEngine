@@ -31,8 +31,8 @@ const getSubject = async (req, res )=>{
 
    const { data, error } = await getSubjectsByClass(classId);
 
-   if(data.length === 0|| error){
-    throw error
+    if(error){
+     throw error;
    };
 
    res.status(200).json({
@@ -42,13 +42,18 @@ const getSubject = async (req, res )=>{
 };
 
 const updateSubject = async(req, res)=>{
-    const id = req.params.id;
+    const id = req.params.subjectId;
     const { subjectName} = req.body;
 
     const { data, error }= await updateSubjectByClass(id, subjectName);
-    if(data.length=== 0||error){
+    if(error){
         throw error
     };
+    if(!data || data.length === 0){
+        const newError = new Error("Subject not found");
+        newError.status = 404;
+        throw newError;
+    }
 
     res.status(200).json({
         message: "Update successfull",
@@ -59,9 +64,14 @@ const updateSubject = async(req, res)=>{
 
 
 const deleteSubject = async(req, res)=>{
-    const id = req.params.id;
+    const id = req.params.subjectId;
 
     const {data, error }= await deleteSubjectByClass(id);
+    if(error){
+        const deleteError = new Error("This subject still has related schemes. Remove those records first, then try again.");
+        deleteError.status = 409;
+        throw deleteError;
+    }
     res.status(200).json({
         message: "Deleted successfully",
         data: []
