@@ -45,6 +45,17 @@ const getTopics = async(req, res)=>{
     });
 };
 
+const getTopicDetails = async (req, res) => {
+    const { data, error } = await require("../services/topicsServices").getTopicById(req.params.id);
+    if (error) throw error;
+    if (!data) {
+        const notFound = new Error("Topic not found");
+        notFound.status = 404;
+        throw notFound;
+    }
+    res.status(200).json({ message: "Topic available", data });
+};
+
 const updateTopic = async(req, res)=>{
     const { id } = req.params;
     const { title, objectives, week } = req.body;
@@ -89,6 +100,7 @@ const deleteTopic = async(req, res)=>{
 module.exports = {
     createTopic,
     getTopics,
+    getTopicDetails,
     updateTopic,
     deleteTopic
 };

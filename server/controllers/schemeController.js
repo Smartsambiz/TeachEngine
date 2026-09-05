@@ -1,5 +1,6 @@
 const {  createSchemeProfile,
     getSchemeBySubject,
+    getSchemeById,
     updateSchemeProfile,
     deleteSchemeProfile
 } = require("../services/schemeServices");
@@ -42,6 +43,17 @@ const getScheme = async(req, res)=>{
         message: "Scheme of work available",
         data,
     });
+};
+
+const getSchemeDetails = async (req, res) => {
+    const { data, error } = await getSchemeById(req.params.id);
+    if (error) throw error;
+    if (!data) {
+        const notFound = new Error("Scheme of work not found");
+        notFound.status = 404;
+        throw notFound;
+    }
+    res.status(200).json({ message: "Scheme of work available", data });
 };
 
 const updateScheme = async(req, res)=>{
@@ -88,6 +100,7 @@ const deleteScheme = async(req, res)=>{
 module.exports = {
     createScheme,
     getScheme,
+    getSchemeDetails,
     updateScheme,
     deleteScheme
 };

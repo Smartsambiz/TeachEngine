@@ -26,6 +26,11 @@ const getSubjectsByClass = async(classId)=>{
     return result
 };
 
+const getSubjectById = async(id)=>{
+    const { data, error } = await databaseFrom.select("*").eq("id", id).single();
+    return { data, error };
+};
+
 
 const updateSubjectByClass = async(id, subjectName)=>{
     const { data, error } = await databaseFrom.update({
@@ -47,6 +52,7 @@ const deleteSubjectByClass = async(id)=>{
 module.exports = {
     createSubject,
     getSubjectsByClass,
+    getSubjectById,
     updateSubjectByClass,
     deleteSubjectByClass
 }

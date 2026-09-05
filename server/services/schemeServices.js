@@ -22,6 +22,11 @@ const getSchemeBySubject = async(subjectId)=>{
     return results
 };
 
+const getSchemeById = async(id)=>{
+    const { data, error } = await databaseFrom.select("*").eq("id", id).single();
+    return { data, error };
+};
+
 const updateSchemeProfile = async(id , term, academicYear)=>{
     const { data, error } = await databaseFrom.update({
         term: term,
@@ -45,6 +50,7 @@ const deleteSchemeProfile = async(id)=>{
 module.exports = {
     createSchemeProfile,
     getSchemeBySubject,
+    getSchemeById,
     updateSchemeProfile,
     deleteSchemeProfile
 }

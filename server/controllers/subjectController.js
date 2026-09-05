@@ -1,4 +1,4 @@
-const { createSubject, getSubjectsByClass, updateSubjectByClass, deleteSubjectByClass } = require("../services/subjectServices");
+const { createSubject, getSubjectsByClass, getSubjectById, updateSubjectByClass, deleteSubjectByClass } = require("../services/subjectServices");
 
 
 const createSubjectByClass = async (req, res, next)=>{
@@ -41,6 +41,17 @@ const getSubject = async (req, res )=>{
    })
 };
 
+const getSubjectDetails = async (req, res) => {
+    const { data, error } = await getSubjectById(req.params.subjectId);
+    if (error) throw error;
+    if (!data) {
+        const notFound = new Error("Subject not found");
+        notFound.status = 404;
+        throw notFound;
+    }
+    res.status(200).json({ message: "Subject available", data });
+};
+
 const updateSubject = async(req, res)=>{
     const id = req.params.subjectId;
     const { subjectName} = req.body;
@@ -81,6 +92,7 @@ const deleteSubject = async(req, res)=>{
 module.exports = {
     createSubjectByClass,
     getSubject,
+    getSubjectDetails,
     updateSubject, 
     deleteSubject
 }

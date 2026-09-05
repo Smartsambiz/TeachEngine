@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { createSubjectByClass, getSubject, updateSubject, deleteSubject} = require("../controllers/subjectController");
+const { createSubjectByClass, getSubject, getSubjectDetails, updateSubject, deleteSubject} = require("../controllers/subjectController");
 
 
 
@@ -12,6 +12,7 @@ router.post('/subjects', createSubjectByClass);
 
 // GET /subjectbyid
 router.get('/subjects/class/:classId', getSubject);
+router.get('/subjects/:subjectId', getSubjectDetails);
 
 // PUT /subjectbyid
 router.put('/subjects/:subjectId', updateSubject);
