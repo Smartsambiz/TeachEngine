@@ -111,7 +111,8 @@ const generateAndSaveLessonNote = async(req, res)=>{
 
     const dbData = dbResponse.data;
     const aiResponse = await aiService.generateLessonNote(dbData.title, dbData.objectives, dbData.week, studentLevel);
-    const { data, error } = await saveLessonNote(aiResponse, 'draft', topicId);
+    const serializedLesson = JSON.stringify(aiResponse);
+    const { data, error } = await saveLessonNote(serializedLesson, 'draft', topicId);
 
     if(error){
         throw error

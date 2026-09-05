@@ -7,6 +7,7 @@ import ClassDetails from "./pages/ClassDetails";
 import SubjectDetails from "./pages/SubjectDetails";
 import TopicPlanner from "./pages/TopicPlanner";
 import LessonNote from "./pages/LessonNote";
+import WorkspaceShell from "./components/WorkspaceShell";
 
 function ProtectedRoute({ children }) {
   const { token, loading } = useAuth();
@@ -14,7 +15,7 @@ function ProtectedRoute({ children }) {
   // If the app is still reading local browser storage on boot, freeze the view safely
   if (loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-slate-900 text-slate-400">
+      <div className="flex min-h-screen items-center justify-center bg-[#f7f8fc] text-slate-500">
         Loading TeachEngine...
       </div>
     );
@@ -26,7 +27,7 @@ function ProtectedRoute({ children }) {
   }
 
   // If authenticated, let them view the secure page content!
-  return children;
+  return <WorkspaceShell>{children}</WorkspaceShell>;
 }
 
 function App() {

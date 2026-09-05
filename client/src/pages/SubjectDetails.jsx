@@ -1,7 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import API from "../services/api";
 import { useState, useEffect } from "react";
-import Navbar from "../components/Navbar";
 
 
 
@@ -42,23 +41,22 @@ export default function SubjectDetails(){
 
 
     return (
-        <div className="min-h-screen overflow-x-hidden bg-slate-900 p-4 font-sans text-slate-100 sm:p-6 md:p-12">
-            <Navbar />
+        <div className="overflow-x-hidden p-4 sm:p-6 lg:p-10">
             <main className="mx-auto max-w-5xl">
-            <p className="text-sm font-semibold uppercase tracking-wider text-slate-400">Subject workspace</p>
-            <h1 className="mt-3 bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-3xl font-black tracking-tight text-transparent md:text-4xl">Schemes of work</h1>
-            <p className="mt-3 text-slate-400">Organise the rhythm of your teaching across each term.</p>
+            <p className="eyebrow">Subject workspace</p>
+            <h1 className="page-title mt-3">Schemes of work</h1>
+            <p className="mt-3 text-slate-500">Organise the rhythm of your teaching across each term.</p>
             {error ? (
-                <p role="alert" className="mt-8 rounded-xl border border-red-500/30 bg-red-500/10 p-4 text-red-300">{error}</p>
+                <p role="alert" className="mt-8 rounded-xl border border-red-200 bg-red-50 p-4 text-red-700">Something went wrong. {error}</p>
             ): loading ? (
-                <p className="mt-8 text-slate-400">Loading schemes...</p>
-            ): schemes.length === 0 ? <p className="mt-8 rounded-xl border-2 border-dashed border-slate-800 p-8 text-center text-slate-500">No scheme created yet.</p>:
-                <div className="mt-8 grid gap-4 sm:grid-cols-2">{schemes.map(sch => <Link key={sch.id} className="block rounded-xl border border-slate-700/60 bg-slate-800/50 p-6 text-slate-100 no-underline shadow-xl backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:border-indigo-500/80 hover:shadow-indigo-500/5" to={`/schemes/${sch.id}`}><p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Scheme of work</p><p className="mt-3 text-2xl font-bold text-slate-100">{sch.term}</p><p className="mt-2 text-sm text-slate-400">{sch.academic_year}</p></Link>)}</div>
+                <p className="mt-8 text-slate-500">Loading schemes...</p>
+            ): schemes.length === 0 ? <p className="mt-8 border-2 border-dashed border-slate-200 p-8 text-center text-slate-500">No scheme created yet.</p>:
+                <div className="mt-8 grid gap-4 sm:grid-cols-2">{schemes.map(sch => <Link key={sch.id} className="workspace-card workspace-card-interactive block p-6 no-underline" to={`/schemes/${sch.id}`}><p className="eyebrow">Scheme of work</p><p className="mt-3 text-lg font-semibold text-slate-900">{sch.term}</p><p className="mt-2 text-sm text-slate-500">{sch.academic_year}</p><p className="mt-5 text-sm font-semibold text-indigo-600">Open scheme →</p></Link>)}</div>
             }
-            <form onSubmit={handleCreateScheme} className="mt-12 max-w-xl space-y-4 rounded-xl border border-slate-800 bg-slate-800/30 p-6">
-                    <h2 className="text-2xl font-bold text-slate-100">Add a scheme</h2>
-                    <div className="space-y-4"><div><label htmlFor="term" className="mb-2 block text-sm font-semibold uppercase tracking-wider text-slate-400">Term</label><input id="term" className="w-full rounded-lg border border-slate-800 bg-slate-950 p-3 text-sm text-slate-200 placeholder-slate-500 transition focus:border-indigo-500 focus:outline-none" onChange={(e) => setTerm(e.target.value)} value={term} placeholder="e.g. First term" type="text" required /></div><div><label htmlFor="academicYear" className="mb-2 block text-sm font-semibold uppercase tracking-wider text-slate-400">Academic year</label><input id="academicYear" className="w-full rounded-lg border border-slate-800 bg-slate-950 p-3 text-sm text-slate-200 placeholder-slate-500 transition focus:border-indigo-500 focus:outline-none" onChange={(e) => setAcademicYear(e.target.value)} value={academicYear} placeholder="e.g. 2026 / 2027" type="text" required /></div></div>
-                    <button type="submit" className="w-full rounded-lg bg-indigo-600 px-6 py-3 text-sm font-bold tracking-wide text-white shadow-lg shadow-indigo-600/10 transition duration-150 hover:bg-indigo-500 active:scale-95 sm:w-auto">Create scheme</button>
+                <form onSubmit={handleCreateScheme} className="workspace-card mt-12 max-w-xl space-y-4 p-6">
+                    <h2 className="section-title">Add a scheme</h2>
+                    <div className="space-y-4"><div><label htmlFor="term" className="mb-2 block text-sm font-semibold text-slate-700">Term</label><input id="term" className="field" onChange={(e) => setTerm(e.target.value)} value={term} placeholder="e.g. First term" type="text" required /></div><div><label htmlFor="academicYear" className="mb-2 block text-sm font-semibold text-slate-700">Academic year</label><input id="academicYear" className="field" onChange={(e) => setAcademicYear(e.target.value)} value={academicYear} placeholder="e.g. 2026 / 2027" type="text" required /></div></div>
+                    <button type="submit" className="primary-button w-full sm:w-auto">Create scheme</button>
             </form>
             </main>
         </div>

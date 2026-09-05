@@ -32,29 +32,29 @@ export default function Login() {
     };
 
     return (
-        <div className="min-h-screen overflow-x-hidden bg-slate-950 p-4 font-sans text-slate-100 sm:p-6 md:p-10">
+        <div className="min-h-screen overflow-x-hidden bg-[#f7f8fc] p-4 font-sans text-slate-900 sm:p-6 md:p-10">
             <Navbar />
             <main className="flex min-h-[calc(100vh-6rem)] items-center justify-center py-8 sm:py-12">
-            <div className="grid w-full max-w-5xl overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 shadow-2xl lg:grid-cols-[1.05fr_0.95fr]">
-                <section className="hidden bg-gradient-to-br from-slate-900 via-slate-900 to-indigo-950 p-10 lg:flex lg:flex-col lg:justify-between xl:p-14">
+            <div className="grid w-full max-w-5xl overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm lg:grid-cols-[1.05fr_0.95fr]">
+                <section className="hidden bg-indigo-950 p-10 text-white lg:flex lg:flex-col lg:justify-between xl:p-14">
                     <div>
                         <p className="text-sm font-semibold uppercase tracking-[0.18em] text-indigo-300">Your teaching desk</p>
-                        <h1 className="mt-8 max-w-lg text-4xl font-black leading-tight tracking-tight text-white xl:text-5xl">Plan less admin. Teach with more intention.</h1>
-                        <p className="mt-6 max-w-md text-base leading-7 text-slate-300">TeachEngine keeps your classes, weekly schemes, objectives, and lesson notes together so your best thinking is easy to find.</p>
+                        <h1 className="mt-8 max-w-lg text-4xl font-black leading-tight tracking-tight xl:text-5xl">Plan less admin. Teach with more intention.</h1>
+                        <p className="mt-6 max-w-md text-base leading-7 text-indigo-100">TeachEngine keeps your classes, weekly schemes, objectives, and lesson notes together so your best thinking is easy to find.</p>
                         <div className="mt-10 space-y-4">
-                            <div className="flex items-center gap-3 text-sm text-slate-200"><span className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-400/10 text-emerald-300">1</span>Organise every class in one workspace</div>
-                            <div className="flex items-center gap-3 text-sm text-slate-200"><span className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-400/10 text-emerald-300">2</span>Turn objectives into weekly teaching plans</div>
-                            <div className="flex items-center gap-3 text-sm text-slate-200"><span className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-400/10 text-emerald-300">3</span>Keep lesson notes ready for the classroom</div>
+                            <div className="flex items-center gap-3 text-sm text-indigo-50"><span className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-400/20 text-emerald-200">1</span>Organise every class in one workspace</div>
+                            <div className="flex items-center gap-3 text-sm text-indigo-50"><span className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-400/20 text-emerald-200">2</span>Turn objectives into weekly teaching plans</div>
+                            <div className="flex items-center gap-3 text-sm text-indigo-50"><span className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-400/20 text-emerald-200">3</span>Keep lesson notes ready for the classroom</div>
                         </div>
                     </div>
-                    <p className="text-sm text-slate-400">A quieter way to prepare meaningful lessons.</p>
+                    <p className="text-sm text-indigo-200">A quieter way to prepare meaningful lessons.</p>
                 </section>
 
-                <section className="bg-slate-900 p-6 sm:p-10 lg:p-12">
+                <section className="bg-white p-6 sm:p-10 lg:p-12">
                     <div className="mb-8 lg:hidden">
-                        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-indigo-300">TeachEngine · Your teaching desk</p>
+                        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-indigo-700">TeachEngine · Your teaching desk</p>
                     </div>
-                    <div className="mb-8"><p className="text-sm font-semibold uppercase tracking-wider text-slate-400">Teacher sign in</p><h2 className="mt-3 text-3xl font-black tracking-tight text-white">Welcome back</h2><p className="mt-3 text-slate-400">Pick up where your planning left off.</p></div>
+                    <div className="mb-8"><p className="eyebrow">Teacher sign in</p><h2 className="mt-3 text-3xl font-black tracking-tight text-slate-900">Welcome back</h2><p className="mt-3 text-slate-500">Pick up where your planning left off.</p></div>
 
                 {error && (
                     <div role="alert" className="rounded-lg border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-300">
@@ -64,35 +64,35 @@ export default function Login() {
 
                 <form className="space-y-5" onSubmit={handleSubmit}>
                     <div>
-                        <label htmlFor="login-email" className="mb-2 block text-sm font-semibold text-slate-200">Email address</label>
+                        <label htmlFor="login-email" className="mb-2 block text-sm font-semibold text-slate-700">Email address</label>
                         <input 
                             id="login-email"
                             type="email" required
                             autoComplete="email"
-                            className="w-full rounded-lg border border-slate-800 bg-slate-950 p-3 text-sm text-slate-200 placeholder-slate-500 transition focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
+                            className="field"
                             placeholder="you@school.com"
                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         />
                     </div>
                     <div>
-                        <div className="mb-2 flex items-center justify-between gap-4"><label htmlFor="login-password" className="block text-sm font-semibold text-slate-200">Password</label><span className="text-xs text-slate-500">Keep it private</span></div>
+                        <div className="mb-2 flex items-center justify-between gap-4"><label htmlFor="login-password" className="block text-sm font-semibold text-slate-700">Password</label><span className="text-xs text-slate-400">Keep it private</span></div>
                         <input 
                             id="login-password"
                             type="password" required
                             autoComplete="current-password"
-                            className="w-full rounded-lg border border-slate-800 bg-slate-950 p-3 text-sm text-slate-200 placeholder-slate-500 transition focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
+                            className="field"
                             placeholder="••••••••"
                             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                         />
                     </div>
-                    <button type="submit" className="w-full rounded-lg bg-indigo-600 px-6 py-3 text-sm font-bold tracking-wide text-white shadow-lg shadow-indigo-600/10 transition duration-150 hover:bg-indigo-500 active:scale-95 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 focus:ring-offset-slate-900">
+                    <button type="submit" className="primary-button w-full">
                         Open my workspace
                     </button>
                 </form>
 
-                <p className="mt-8 border-t border-slate-800 pt-6 text-center text-sm text-slate-400">
+                <p className="mt-8 border-t border-slate-100 pt-6 text-center text-sm text-slate-500">
                     New to TeachEngine?{" "}
-                    <Link to="/register" className="font-semibold text-indigo-400 no-underline hover:text-indigo-300">Create your teacher account</Link>
+                    <Link to="/register" className="link-accent no-underline">Create your teacher account</Link>
                 </p>
                 </section>
             </div>
