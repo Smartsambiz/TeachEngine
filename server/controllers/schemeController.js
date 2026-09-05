@@ -40,7 +40,7 @@ const getScheme = async(req, res)=>{
 
     res.status(200).json({
         message: "Scheme of work available",
-        data
+        data,
     });
 };
 

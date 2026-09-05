@@ -9,7 +9,7 @@ router.use(authMiddleware);
 router.post('/classes',  classController.createClasses);
 
 // GET get classes by teacher
-router.get('/classes/:teacherId', classController.getClassByTeacher);
+router.get('/classes', classController.getClassByTeacher);
 
 // PUT update class by teacher
 router.put('/classes/:id', classController.updateClassByTeacher);

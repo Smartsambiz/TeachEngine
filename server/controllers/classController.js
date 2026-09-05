@@ -19,9 +19,9 @@ const createClasses = async(req, res)=>{
     
 };
 
-const getClassByTeacher = async(req, res, next)=>{
-    try{
-        const teacherId = req.params.teacherId;
+const getClassByTeacher = async(req, res)=>{
+    
+        const teacherId = req.user.id;
         const { data, error} = await classService.getClassesByTeacher(teacherId);
         if(!data || data.length === 0 || error){
             const newError = new Error("No class found");
@@ -33,9 +33,7 @@ const getClassByTeacher = async(req, res, next)=>{
             data
         });
 
-    }catch(err){
-        next(err)
-    }
+    
 };
 
 const updateClassByTeacher = async(req, res, next)=>{
